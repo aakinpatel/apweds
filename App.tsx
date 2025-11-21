@@ -108,15 +108,15 @@ const QASection: React.FC = () => (
           <ScrollReveal key={idx} animation="fade-up" delay={idx * 100}>
             <div className="bg-white p-8 shadow-lg border-t-4 border-wedding-500 rounded-sm hover:-translate-y-1 transition-transform duration-300 h-full">
               <h4 className="font-serif text-xl text-wedding-800 mb-3 font-semibold">{faq.question}</h4>
-              <p className="text-wedding-600 text-sm leading-relaxed">{faq.answer}</p>
+              <p className="text-wedding-600 text-sm leading-relaxed whitespace-pre-line">{faq.answer}</p>
             </div>
           </ScrollReveal>
         ))}
       </div>
       <ScrollReveal animation="fade-in" delay={400}>
         <div className="text-center mt-16">
-          <p className="font-serif text-2xl text-wedding-800 italic">
-            Get in touch with Aakin and Palak
+          <p className="font-serif text-xl text-wedding-800 italic">
+            If you have any other questions, please reach out to Aakin & Palak.
           </p>
         </div>
       </ScrollReveal>
