@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Heart } from 'lucide-react';
 
@@ -17,6 +18,7 @@ const Navigation: React.FC = () => {
     { name: 'Our Story', href: '#story' },
     { name: 'Guest Lens', href: '#gallery' },
     { name: 'Events', href: '#events' },
+    { name: 'Live', href: '#live' },
     { name: 'Travel', href: '#travel' },
     { name: 'Q&A', href: '#qa' },
     { name: 'RSVP', href: '#rsvp' },
