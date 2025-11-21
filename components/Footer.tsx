@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
     <footer className="bg-wedding-900 text-wedding-200 py-12 text-center">
       <div className="container mx-auto px-6">
         <ScrollReveal animation="fade-up">
-          <h2 className="font-serif text-3xl mb-4 text-white">{WEDDING_DETAILS.couple.names}</h2>
+          <h2 className="font-serif text-3xl mb-4 text-white">Aakin & Palak</h2>
           <p className="uppercase tracking-widest text-xs mb-8 opacity-70">{WEDDING_DETAILS.date}</p>
           <p className="font-serif italic text-lg mb-8 max-w-md mx-auto">
             "We are so excited to celebrate this special day with our favorite people."
