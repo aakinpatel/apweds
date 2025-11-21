@@ -18,8 +18,8 @@ export const WEDDING_DETAILS = {
 Since 2023, distance has tested us, strengthened us, and proved that love always finds a way. We've become each other's strength and light through every challenge. Now, as we look toward 2026, we're ready to end the distance and begin the chapter destiny has always planned for us.`,
   faqs: [
     { question: "What is the dress code?", answer: "We encourage traditional Indian Formal or Black Tie. For the Sangeet, colorful Indian formal wear or Cocktail attire is recommended! For the Wedding Ceremony, please avoid wearing red (bride's color) or black." },
-    { question: "Is the food vegetarian?", answer: "Yes, all meals served at the wedding events will be strictly vegetarian, with Jain options available upon request." },
-    { question: "Are kids welcome?", answer: "We love your little ones! Please refer to your specific invitation card for family details." },
+    { question: "What will the weather be like?", answer: "July in Illinois is typically warm and sunny, with temperatures averaging around 80°F. However, all indoor events will be fully air-conditioned for your comfort." },
+    { question: "What is the venue address?", answer: "Ashyana Banquets\n1620 75th St, Downers Grove, IL 60516" },
     { question: "Is there parking?", answer: "Yes, Ashyana Banquets provides ample complimentary parking for all guests." }
   ]
 };
