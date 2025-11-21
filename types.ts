@@ -6,6 +6,8 @@ export interface EventDetail {
   location: string;
   description: string;
   icon: 'ring' | 'cheers' | 'dinner' | 'party' | 'ganesh' | 'dance' | 'garrix';
+  expectedWeather?: string;
+  liveStreamUrl?: string;
 }
 
 export interface RSVPFormData {
@@ -37,6 +39,7 @@ export interface TravelOption {
   type: 'hotel' | 'transport';
   description: string;
   address: string;
+  distance?: string;
   priceRange?: string;
   bookingUrl: string;
 }
