@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Camera, Smartphone, UploadCloud } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
@@ -8,28 +8,23 @@ const UPLOAD_LINK = "https://weduploader.com/upload/vFDsI0vRi3gE0oRh";
 // ============================================================================
 // CUSTOM QR CODE CONFIGURATION
 // ============================================================================
-// 1. Upload your QR code image to Google Drive.
-// 2. Right-click the file in Drive -> Share -> General Access -> "Anyone with the link".
-// 3. Copy the "File ID" from the link and paste it below.
-//    (The ID is the string between /d/ and /view in the URL)
-//    Example URL: https://drive.google.com/file/d/1abc123456789.../view
-//    ID: 1abc123456789...
-const QR_CODE_DRIVE_ID: string = "1t4v8RzVBasfz_B1oYJnMiQggx_XDjW5b"; 
+// Place your custom QR code image in: public/images/qrcode.png
+const LOCAL_QR_PATH = "./images/qrcode.png";
 // ============================================================================
 
 const Gallery: React.FC = () => {
   
-  const getQrImage = () => {
-    if (QR_CODE_DRIVE_ID && QR_CODE_DRIVE_ID.length > 5) {
-      // Use the Google Drive thumbnail API to get the image
-      return `https://drive.google.com/thumbnail?id=${QR_CODE_DRIVE_ID}&sz=w1000`;
-    }
-    // Fallback: Generate a dynamic QR code if no custom image ID is provided
-    // color=600000 matches tailwind wedding-800
-    return `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(UPLOAD_LINK)}&bgcolor=FFFBF5&color=600000`;
-  };
+  // Initialize with local path
+  const [qrSrc, setQrSrc] = useState(LOCAL_QR_PATH);
 
-  const qrCodeUrl = getQrImage();
+  const handleQrError = () => {
+    // Fallback: Generate a dynamic QR code if local image is missing
+    console.warn("Local QR code not found, generating fallback.");
+    const fallbackUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(UPLOAD_LINK)}&bgcolor=FFFBF5&color=600000`;
+    if (qrSrc !== fallbackUrl) {
+      setQrSrc(fallbackUrl);
+    }
+  };
 
   return (
     <section id="gallery" className="py-24 bg-white relative overflow-hidden">
@@ -104,9 +99,10 @@ const Gallery: React.FC = () => {
                      {/* Wrapper to tint the black QR code parts to maroon using mix-blend-screen */}
                      <div className="bg-wedding-800 w-64 h-64">
                        <img 
-                         src={qrCodeUrl} 
+                         src={qrSrc} 
                          alt="Upload QR Code" 
                          className="w-full h-full object-cover mix-blend-screen"
+                         onError={handleQrError}
                        />
                      </div>
                    </div>
@@ -116,7 +112,7 @@ const Gallery: React.FC = () => {
                <h3 className="text-wedding-100 font-serif text-2xl mb-2">Scan to Upload</h3>
                
                {/* Separator Line */}
-               <div className="w-16 h-px bg-wedding-200/50 mx-auto mb-6 mt-2"></div>
+               <div className="w-48 h-px bg-wedding-200/50 mx-auto mb-6 mt-2"></div>
                
                <div className="w-full">
                  <div className="grid grid-cols-3 gap-2 w-full text-center max-w-xs mx-auto">
