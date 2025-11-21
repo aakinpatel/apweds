@@ -19,8 +19,9 @@ const Gallery: React.FC = () => {
 
   const handleQrError = () => {
     // Fallback: Generate a dynamic QR code if local image is missing
+    // We use Black on White to ensure the mix-blend-screen tinting logic works consistently
     console.warn("Local QR code not found, generating fallback.");
-    const fallbackUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(UPLOAD_LINK)}&bgcolor=FFFBF5&color=600000`;
+    const fallbackUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(UPLOAD_LINK)}&bgcolor=FFFFFF&color=000000`;
     if (qrSrc !== fallbackUrl) {
       setQrSrc(fallbackUrl);
     }
@@ -95,7 +96,7 @@ const Gallery: React.FC = () => {
                    rel="noopener noreferrer"
                    className="block cursor-pointer transition-transform hover:scale-105"
                  >
-                   <div className="bg-[#FFFBF5] p-2 rounded-sm shadow-2xl transform rotate-2 transition-transform hover:rotate-0 duration-500 mb-6">
+                   <div className="bg-white p-2 rounded-sm shadow-2xl transform rotate-2 transition-transform hover:rotate-0 duration-500 mb-6">
                      {/* Wrapper to tint the black QR code parts to maroon using mix-blend-screen */}
                      <div className="bg-wedding-800 w-64 h-64">
                        <img 
