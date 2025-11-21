@@ -16,35 +16,28 @@ import { WEDDING_DETAILS } from './constants';
 // ============================================================================
 
 /**
- * OPTION 1: GOOGLE DRIVE (Recommended)
+ * PRIMARY IMAGE SOURCE: LOCAL FILE
+ * Place your image in: public/images/couple.jpg
+ * This loads significantly faster than Google Drive.
  */
-const GOOGLE_DRIVE_ID = "1NdwgFPDHR88BlPOOrs3GsvI57mwfnOIu";
+const LOCAL_IMAGE_PATH = "./images/couple.jpg";
 
 /**
- * OPTION 2: DIRECT URL OR LOCAL FILE
+ * BACKUP IMAGE
+ * Shown if the local image is missing.
  */
 const BACKUP_IMAGE_URL = "https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
 
 // ============================================================================
 
 const InfoSection: React.FC = () => {
-  const getDriveUrl = (idOrUrl: string) => {
-    if (!idOrUrl) return BACKUP_IMAGE_URL;
-    if (idOrUrl.startsWith('http') || idOrUrl.startsWith('./') || idOrUrl.startsWith('/')) {
-      return idOrUrl;
-    }
-    return `https://drive.google.com/thumbnail?id=${idOrUrl}&sz=w1000`;
-  };
-
-  const initialImage = GOOGLE_DRIVE_ID 
-    ? getDriveUrl(GOOGLE_DRIVE_ID)
-    : BACKUP_IMAGE_URL;
-
-  const [imgSrc, setImgSrc] = useState(initialImage);
+  // Initialize with the local path
+  const [imgSrc, setImgSrc] = useState(LOCAL_IMAGE_PATH);
 
   const handleImageError = () => {
+    // If the local image fails (file not found in public/images/), switch to backup
     if (imgSrc !== BACKUP_IMAGE_URL) {
-      console.warn("Primary image failed to load. Switching to backup image.");
+      console.warn("Local image failed to load. Switching to backup image.");
       setImgSrc(BACKUP_IMAGE_URL);
     }
   };
