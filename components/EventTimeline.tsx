@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { EVENTS } from '../constants';
-import { Clock, MapPin, Wine, Music, Heart } from 'lucide-react';
+import { Clock, MapPin, Wine, Music, Heart, Sun } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const EventTimeline: React.FC = () => {
@@ -80,10 +80,20 @@ const EventTimeline: React.FC = () => {
                   >
                     <div className={`bg-wedding-50 p-8 rounded-lg border border-wedding-100 shadow-sm hover:shadow-md transition-shadow duration-300 text-center ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'} h-full`}>
                       <h3 className="font-serif text-2xl text-wedding-800 mb-2">{event.title}</h3>
-                      <div className={`flex items-center gap-2 text-wedding-500 text-sm uppercase tracking-wider font-medium mb-3 justify-center ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'}`}>
-                        <Clock className="w-4 h-4" />
-                        <span>{event.time}</span>
+                      
+                      <div className={`flex flex-col gap-1 mb-3 ${index % 2 === 0 ? 'md:items-start' : 'md:items-end'}`}>
+                        <div className={`flex items-center gap-2 text-wedding-500 text-sm uppercase tracking-wider font-medium justify-center ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'}`}>
+                          <Clock className="w-4 h-4" />
+                          <span>{event.time}</span>
+                        </div>
+                        {event.expectedWeather && (
+                          <div className={`flex items-center gap-2 text-wedding-400 text-xs justify-center ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'}`}>
+                             <Sun className="w-3 h-3" />
+                             <span>{event.expectedWeather}</span>
+                          </div>
+                        )}
                       </div>
+
                       <p className="text-wedding-600 mb-4">{event.description}</p>
                       <div className={`flex items-center gap-2 text-wedding-400 text-sm italic justify-center ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'}`}>
                         <MapPin className="w-4 h-4" />
