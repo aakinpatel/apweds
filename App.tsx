@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import EventTimeline from './components/EventTimeline';
@@ -8,7 +8,9 @@ import RSVPForm from './components/RSVPForm';
 import Footer from './components/Footer';
 import Gallery from './components/Gallery';
 import Travel from './components/Travel';
+import LiveStream from './components/LiveStream';
 import ScrollReveal from './components/ScrollReveal';
+import StreamPlaceholder from './components/StreamPlaceholder';
 import { WEDDING_DETAILS } from './constants';
 
 // ============================================================================
@@ -122,19 +124,31 @@ const QASection: React.FC = () => (
   </section>
 );
 
+const LandingPage: React.FC = () => {
+  return (
+    <>
+      <Navigation />
+      <Hero />
+      <InfoSection />
+      <Gallery />
+      <EventTimeline />
+      <LiveStream />
+      <Travel />
+      <QASection />
+      <RSVPForm />
+      <Footer />
+    </>
+  );
+};
+
 function App() {
   return (
     <HashRouter>
       <div className="min-h-screen font-sans selection:bg-wedding-300 selection:text-wedding-900">
-        <Navigation />
-        <Hero />
-        <InfoSection />
-        <Gallery />
-        <EventTimeline />
-        <Travel />
-        <QASection />
-        <RSVPForm />
-        <Footer />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/live-wait" element={<StreamPlaceholder />} />
+        </Routes>
       </div>
     </HashRouter>
   );
