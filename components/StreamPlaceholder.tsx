@@ -1,9 +1,25 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { EVENTS } from '../constants';
+
+const GIF_MAP: Record<string, string> = {
+  '1': "https://media.giphy.com/media/xTiTnz33dQojDLY4YU/giphy.gif", // Haldi - Party/Fun
+  '2': "https://media.giphy.com/media/l0HlBO7eyxdzTZtEk/giphy.gif", // Grah Shanti - Waiting/Looking around
+  '3': "https://media.giphy.com/media/MOWPkhRAUbR7i/giphy.gif", // Sangeet - Dancing
+  '4': "https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif", // Wedding - Cheering
+};
+
+const DEFAULT_GIF = "https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif";
 
 const StreamPlaceholder: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const eventId = searchParams.get('eventId');
+  
+  const event = EVENTS.find(e => e.id === eventId);
+  const gifUrl = eventId && GIF_MAP[eventId] ? GIF_MAP[eventId] : DEFAULT_GIF;
+
   return (
     <div className="min-h-screen bg-wedding-900 flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
        {/* Background patterns similar to Hero */}
@@ -16,10 +32,9 @@ const StreamPlaceholder: React.FC = () => {
          </h1>
          
          <div className="mb-8 rounded-lg overflow-hidden shadow-2xl border-4 border-wedding-500/30 mx-auto max-w-md animate-fade-in-up" style={{animationDelay: '200ms'}}>
-            {/* Minion Dancing/Cheering GIF */}
             <img 
-              src="https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif" 
-              alt="Minions Dancing" 
+              src={gifUrl}
+              alt="Waiting..." 
               className="w-full h-auto"
             />
          </div>
@@ -29,7 +44,7 @@ const StreamPlaceholder: React.FC = () => {
          </p>
          
          <p className="text-wedding-200/60 mb-12 animate-fade-in-up max-w-md" style={{animationDelay: '500ms'}}>
-           We haven't received the live stream links from the videographer just yet. Please check back closer to the event date (7-10 days prior)!
+           We haven't received the live stream link for {event ? <strong>{event.title}</strong> : "this event"} just yet. Please check back closer to the event date (7-10 days prior)!
          </p>
 
          <Link 
