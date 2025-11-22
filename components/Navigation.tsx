@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Heart } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -62,10 +62,38 @@ const Navigation: React.FC = () => {
         <a 
           href="#"
           onClick={handleLogoClick}
-          className={`font-serif text-2xl tracking-widest font-semibold flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity ${isScrolled ? 'text-wedding-800' : 'text-wedding-800 md:text-white'}`}
+          className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity group"
         >
-          <Heart className="w-5 h-5 fill-current" />
-          <span>A & P</span>
+          {/* Mini Editorial Logo (Matching Footer Style) */}
+          <div className="relative flex items-center justify-center p-2">
+            
+            {/* Subtle Rotating Ring */}
+            <div className={`absolute inset-0 border rounded-full animate-[spin_12s_linear_infinite] transition-colors duration-300 ${isScrolled ? 'border-wedding-800/20' : 'border-wedding-100/20'}`}></div>
+            
+            {/* Typography */}
+            <div className="flex items-baseline gap-1 relative z-10 px-1">
+              <span 
+                className={`font-serif text-2xl md:text-3xl leading-none transition-colors duration-300 ${isScrolled ? 'text-wedding-800' : 'text-wedding-100'}`} 
+                style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300 }}
+              >
+                A
+              </span>
+
+              <span 
+                className={`font-serif text-sm md:text-base italic relative -top-0.5 transition-colors duration-300 ${isScrolled ? 'text-wedding-600' : 'text-wedding-300'}`} 
+                style={{ fontFamily: '"Cormorant Garamond", serif' }}
+              >
+                &
+              </span>
+
+              <span 
+                className={`font-serif text-2xl md:text-3xl leading-none transition-colors duration-300 ${isScrolled ? 'text-wedding-800' : 'text-wedding-100'}`} 
+                style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300 }}
+              >
+                P
+              </span>
+            </div>
+          </div>
         </a>
 
         {/* Desktop Menu */}
