@@ -53,7 +53,7 @@ const LiveStream: React.FC = () => {
                 </p>
 
                 <Link 
-                  to="/live-wait"
+                  to={`/live-wait?eventId=${event.id}`}
                   className="flex items-center justify-center gap-3 w-full bg-red-700 hover:bg-red-600 text-white py-4 rounded-sm font-medium uppercase tracking-wider text-sm transition-all shadow-lg hover:shadow-red-900/50 group-hover:translate-y-[-2px]"
                 >
                   <Youtube className="w-5 h-5" />
