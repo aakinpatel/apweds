@@ -64,31 +64,25 @@ const Navigation: React.FC = () => {
           onClick={handleLogoClick}
           className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity group"
         >
-          {/* Mini Editorial Logo (Matching Footer Style) */}
-          <div className="relative flex items-center justify-center p-2">
-            
-            {/* Subtle Rotating Ring */}
-            <div className={`absolute inset-0 border rounded-full animate-[spin_12s_linear_infinite] transition-colors duration-300 ${isScrolled ? 'border-wedding-800/20' : 'border-wedding-100/20'}`}></div>
+          {/* Premium Editorial Logo (No Ring) */}
+          <div className="relative flex items-center justify-center p-1">
             
             {/* Typography */}
-            <div className="flex items-baseline gap-1 relative z-10 px-1">
+            <div className="flex items-center gap-1 relative z-10">
               <span 
-                className={`font-serif text-2xl md:text-3xl leading-none transition-colors duration-300 ${isScrolled ? 'text-wedding-800' : 'text-wedding-100'}`} 
-                style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300 }}
+                className={`font-display text-3xl md:text-4xl leading-none transition-colors duration-300 tracking-wide ${isScrolled ? 'text-wedding-800' : 'text-wedding-100'}`} 
               >
                 A
               </span>
 
               <span 
-                className={`font-serif text-sm md:text-base italic relative -top-0.5 transition-colors duration-300 ${isScrolled ? 'text-wedding-600' : 'text-wedding-300'}`} 
-                style={{ fontFamily: '"Cormorant Garamond", serif' }}
+                className={`font-display text-lg md:text-xl relative top-[1px] transition-colors duration-300 ${isScrolled ? 'text-wedding-600' : 'text-wedding-300'}`} 
               >
                 &
               </span>
 
               <span 
-                className={`font-serif text-2xl md:text-3xl leading-none transition-colors duration-300 ${isScrolled ? 'text-wedding-800' : 'text-wedding-100'}`} 
-                style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300 }}
+                className={`font-display text-3xl md:text-4xl leading-none transition-colors duration-300 tracking-wide ${isScrolled ? 'text-wedding-800' : 'text-wedding-100'}`} 
               >
                 P
               </span>
@@ -103,7 +97,7 @@ const Navigation: React.FC = () => {
               key={link.name}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className={`text-xs lg:text-sm uppercase tracking-widest hover:text-wedding-500 transition-colors ${
+              className={`text-xs lg:text-sm uppercase tracking-widest hover:text-wedding-500 transition-colors font-medium ${
                 isScrolled ? 'text-wedding-800' : 'text-white'
               }`}
             >
