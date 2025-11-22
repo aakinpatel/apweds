@@ -11,11 +11,13 @@ import ScrollReveal from './ScrollReveal';
 //    Col B: FirstName
 //    Col C: LastName
 //    Col D: Email
-//    Col E: PhoneNumber  <-- NEW FIELD
+//    Col E: PhoneNumber
 //    Col F: GuestSide
 //    Col G: Attending
 //    Col H: Guests
 //    Col I: Message
+//    Col J: IP Address   <-- NEW FIELD
+//    Col K: Location     <-- NEW FIELD
 //
 // 2. Go to Extensions > Apps Script
 // 3. Paste the code below into the script editor:
@@ -33,7 +35,9 @@ import ScrollReveal from './ScrollReveal';
       p.guestSide,    // F: GuestSide
       p.attending,    // G: Attending
       p.guests,       // H: Guests
-      p.message       // I: Message
+      p.message,      // I: Message
+      p.ipAddress,    // J: IP Address
+      p.location      // K: Location
     ]);
     return ContentService.createTextOutput(JSON.stringify({"result":"success"})).setMimeType(ContentService.MimeType.JSON);
   }
@@ -44,7 +48,7 @@ import ScrollReveal from './ScrollReveal';
 // 7. Copy the Web App URL and paste it below inside the quotes.
 // =============================================================================
 
-const GOOGLE_SCRIPT_URL: string = 'https://script.google.com/macros/s/AKfycbwfYzHonYNeT13g_6lix1UJQRpp7lcrlVZo2ClLDHpNoghhorCLUIIFpCcwQlZ1kMdF-Q/exec';
+const GOOGLE_SCRIPT_URL: string = 'https://script.google.com/macros/s/AKfycbz12vCjLfkd177QL3nbaj8NeanbIarkVtPEcdAAsRfP8kAClrx7HVakaimtQGZZ27vy4A/exec';
 
 const SUCCESS_PHRASES = [
   "Jay Umiya Maa!",       // Kadva Patel Kuldevi Greeting
@@ -131,6 +135,25 @@ const RSVPForm: React.FC = () => {
     }
 
     try {
+      // Fetch IP and Location data
+      let ipInfo = { ip: '', location: '' };
+      try {
+        const ipResponse = await fetch('https://ipwho.is/');
+        const ipData = await ipResponse.json();
+        if (ipData.success) {
+          ipInfo = {
+            ip: ipData.ip,
+            location: `${ipData.city}, ${ipData.region}, ${ipData.country}`
+          };
+        } else {
+             // Fallback or partial data if success is false but IP is present
+             ipInfo = { ip: ipData.ip || 'Unknown', location: 'Unknown' };
+        }
+      } catch (err) {
+        console.warn("Could not fetch IP location:", err);
+        ipInfo = { ip: 'Unknown', location: 'Unknown' };
+      }
+
       // Create form data compatible with Google Apps Script
       const formParams = new FormData();
       formParams.append('firstName', formData.firstName);
@@ -145,6 +168,10 @@ const RSVPForm: React.FC = () => {
       formParams.append('guests', finalGuests.toString());
       
       formParams.append('message', formData.message);
+      
+      // Add IP and Location logging
+      formParams.append('ipAddress', ipInfo.ip);
+      formParams.append('location', ipInfo.location);
 
       // We use no-cors because Google Scripts handles redirects that standard fetch doesn't like
       await fetch(GOOGLE_SCRIPT_URL, {
