@@ -41,30 +41,24 @@ const TochmocLogo: React.FC<{ onClick?: () => void }> = ({ onClick }) => (
 const APLogo: React.FC = () => (
   <div className="flex justify-center items-center mb-12">
     {/* Scaled up version of the Navigation Logo */}
-    <div className="relative flex items-center justify-center p-8">
-      
-      {/* Rotating Ring */}
-      <div className="absolute inset-0 border border-wedding-100/20 rounded-full animate-[spin_12s_linear_infinite]"></div>
+    <div className="relative flex items-center justify-center p-4">
       
       {/* Typography */}
-      <div className="flex items-baseline gap-2 relative z-10 px-2">
+      <div className="flex items-center gap-3 relative z-10">
         <span 
-          className="font-serif text-6xl md:text-7xl leading-none text-wedding-100" 
-          style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300 }}
+          className="font-display text-7xl md:text-8xl leading-none text-wedding-100 tracking-wide" 
         >
           A
         </span>
 
         <span 
-          className="font-serif text-2xl md:text-3xl italic relative -top-1 text-wedding-300" 
-          style={{ fontFamily: '"Cormorant Garamond", serif' }}
+          className="font-display text-3xl md:text-4xl relative top-1 text-wedding-300" 
         >
           &
         </span>
 
         <span 
-          className="font-serif text-6xl md:text-7xl leading-none text-wedding-100" 
-          style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300 }}
+          className="font-display text-7xl md:text-8xl leading-none text-wedding-100 tracking-wide" 
         >
           P
         </span>
